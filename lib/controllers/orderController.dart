@@ -27,7 +27,7 @@ class OrderController extends GetxController {
         await FireDb().getUser(uid: Get.find<AuthController>().user.uid);
     var user = Get.find<UserController>().user;
 
-    orderList.bindStream(FireDb().orderStream(user.id));
+    orderList.bindStream(FireDb().orderStreamByUserId(uid: user.id));
 
     allOrderList.bindStream(FireDb().allOrderStreamByStatus(
         status: orderStatus.value,
@@ -38,7 +38,7 @@ class OrderController extends GetxController {
   }
 
   void orderByUser({String userId}) {
-    orderList.bindStream(FireDb().orderStreamByUserId(userId));
+    orderList.bindStream(FireDb().orderStreamByUserId(uid: userId));
   }
 
   // String printOrder() {

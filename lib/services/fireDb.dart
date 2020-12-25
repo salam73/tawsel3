@@ -23,6 +23,70 @@ class FireDb {
     }
   }
 
+  Future<void> addOrder({
+    String uid,
+    String orderNumber,
+    String deliveryToCity,
+    String customerName,
+    String customerAddress,
+    String customerPhone,
+    int amountAfterDelivery,
+    String orderType,
+    String content,
+    String commit,
+    bool isPickup,
+    bool isReturn,
+    bool isSolve,
+    String status,
+    String statusTitle,
+  }) async {
+    try {
+      await _firestore.collection("users").doc(uid).collection("orders").add({
+        'dateCreated': Timestamp.now(),
+        'byUserId': uid,
+        'done': false,
+        'orderNumber': orderNumber ?? '',
+        'deliveryToCity': deliveryToCity ?? '',
+        'customerName': customerName ?? '',
+        'customerAddress': customerAddress ?? '',
+        'customerPhone': customerPhone ?? '',
+        'amountAfterDelivery': amountAfterDelivery ?? 0,
+        'orderType': orderType ?? '',
+        'commit': commit ?? '',
+        'content': content ?? '',
+        'status': status ?? 'جاهز',
+        'statusTitle': statusTitle ?? 'جاهز',
+        'isPickup': isPickup ?? false,
+        'isReturn': isReturn ?? false,
+        'isSolve': isSolve ?? false,
+      });
+
+      await _firestore.collection("orders").add({
+        'dateCreated': Timestamp.now(),
+        'byUserId': uid,
+        // 'content': content,
+        'done': false,
+        'orderNumber': orderNumber ?? '',
+        'deliveryToCity': deliveryToCity ?? '',
+        'customerName': customerName ?? '',
+        'customerAddress': customerAddress ?? '',
+        'customerPhone': customerPhone ?? '',
+        'amountAfterDelivery': amountAfterDelivery ?? 0,
+        'orderType': orderType ?? '',
+        'commit': commit ?? '',
+        'content': content ?? '',
+        'status': status ?? 'جاهز',
+        'statusTitle': statusTitle ?? 'جاهز',
+        'isPickup': isPickup ?? false,
+        'isReturn': isReturn ?? false,
+        'isSolve': isSolve ?? false,
+      });
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future<UserModel> getUser({String uid}) async {
     try {
       DocumentSnapshot _doc =
@@ -47,10 +111,11 @@ class FireDb {
 
   Stream<List<OrderModel>> orderStream(String uid) {
     return _firestore
-        .collection("users")
-        .doc(uid)
+        // .collection("users")
+        // .doc(uid)
         .collection("orders")
         // .orderBy("dateCreated", descending: true)
+        .where('byUserId', isEqualTo: uid)
         .snapshots()
         .map((QuerySnapshot query) {
       List<OrderModel> retVal = List();
@@ -77,7 +142,7 @@ class FireDb {
     });
   }
 
-  Stream<List<OrderModel>> orderStreamByUserId(String uid) {
+  Stream<List<OrderModel>> orderStreamByUserId({String uid}) {
     return _firestore
         .collection("users")
         .doc(uid)

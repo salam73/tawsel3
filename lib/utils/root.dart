@@ -1,7 +1,7 @@
 import 'package:firetodowithauth/controllers/authController.dart';
 import 'package:firetodowithauth/controllers/userController.dart';
-import 'package:firetodowithauth/screens/home.dart';
-import 'package:firetodowithauth/screens/login.dart';
+import 'package:firetodowithauth/screens/appByUser/home.dart';
+import 'package:firetodowithauth/screens/auth/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
