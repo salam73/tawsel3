@@ -22,7 +22,13 @@ class AuthController extends GetxController {
   }
 
 //Create User
-  void createUser(String name, String email, String password) async {
+  void createUser(
+      {String name,
+      String email,
+      String password,
+      String shopName,
+      String shopAddress,
+      String phoneNumber}) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -33,7 +39,11 @@ class AuthController extends GetxController {
       UserModel _user = UserModel(
           id: userCredential.user.uid,
           email: userCredential.user.email,
-          name: name);
+          password: password,
+          name: name,
+          shopName: shopName,
+          shopAddress: shopAddress,
+          phoneNumber: phoneNumber);
       var rs = await FireDb().createNewUser(_user);
       if (rs) {
         Get.find<UserController>().user = _user;

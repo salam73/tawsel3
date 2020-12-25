@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 //import 'package:todo_app/controllers/authController.dart';
 
 class SignUp extends GetWidget<AuthController> {
+  final TextEditingController shopNameController = TextEditingController();
+  final TextEditingController shopAddressController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -15,39 +18,71 @@ class SignUp extends GetWidget<AuthController> {
       appBar: AppBar(
         title: Text("Sign Up"),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(hintText: "Full Name"),
-                controller: nameController,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "إسم المحل"),
+                    controller: shopNameController,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "الإسم الثلاثي"),
+                    controller: nameController,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "العنوان"),
+                    controller: shopAddressController,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "رقم الهاتف"),
+                    controller: phoneNumberController,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(hintText: "الإيميل"),
+                    controller: emailController,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "الباسورد"),
+                    obscureText: true,
+                    controller: passwordController,
+                  ),
+                  FlatButton(
+                    child: Text("Sign Up"),
+                    onPressed: () {
+                      controller.createUser(
+                          name: nameController.text,
+                          email: emailController.text,
+                          password: passwordController.text,
+                          shopName: shopNameController.text,
+                          shopAddress: shopAddressController.text,
+                          phoneNumber: phoneNumberController.text);
+                    },
+                  )
+                ],
               ),
-              SizedBox(
-                height: 40,
-              ),
-              TextFormField(
-                decoration: InputDecoration(hintText: "Email"),
-                controller: emailController,
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              TextFormField(
-                decoration: InputDecoration(hintText: "Password"),
-                obscureText: true,
-                controller: passwordController,
-              ),
-              FlatButton(
-                child: Text("Sign Up"),
-                onPressed: () {
-                  controller.createUser(nameController.text,
-                      emailController.text, passwordController.text);
-                },
-              )
-            ],
+            ),
           ),
         ),
       ),
