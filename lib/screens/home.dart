@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
       init: Get.put(UserController()),
       initState: (_) async {
         Get.find<UserController>().user =
-            await FireDb().getUser(Get.find<AuthController>().user.uid);
+            await FireDb().getUser(uid: Get.find<AuthController>().user.uid);
       },
       builder: (_userController) {
         return Text((_userController.user == null)

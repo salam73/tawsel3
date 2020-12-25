@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'signup.dart';
 
 class Login extends GetWidget<AuthController> {
+  final AuthController _authController = Get.find();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -21,6 +22,7 @@ class Login extends GetWidget<AuthController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(hintText: "Email"),
                 controller: emailController,
               ),
@@ -44,7 +46,13 @@ class Login extends GetWidget<AuthController> {
                 onPressed: () {
                   Get.to(SignUp());
                 },
-              )
+              ),
+              IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  _authController.logOut();
+                },
+              ),
             ],
           ),
         ),

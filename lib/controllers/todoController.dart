@@ -16,7 +16,7 @@ class TodoController extends GetxController {
     //var fireUser = Get.find<AuthController>().user;
     clear();
     Get.find<UserController>().user =
-        await FireDb().getUser(Get.find<AuthController>().user.uid);
+        await FireDb().getUser(uid: Get.find<AuthController>().user.uid);
     var user = Get.find<UserController>().user;
 
     todoList.bindStream(FireDb()

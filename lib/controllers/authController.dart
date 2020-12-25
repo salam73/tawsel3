@@ -62,7 +62,7 @@ class AuthController extends GetxController {
         password: password,
       );
       Get.find<UserController>().user =
-          await FireDb().getUser(userCredential.user.uid);
+          await FireDb().getUser(uid: userCredential.user.uid);
 
       Get.back();
     } catch (e) {

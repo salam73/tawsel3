@@ -24,7 +24,7 @@ class OrderController extends GetxController {
     clear();
 
     Get.find<UserController>().user =
-        await FireDb().getUser(Get.find<AuthController>().user.uid);
+        await FireDb().getUser(uid: Get.find<AuthController>().user.uid);
     var user = Get.find<UserController>().user;
 
     orderList.bindStream(FireDb().orderStream(user.id));
