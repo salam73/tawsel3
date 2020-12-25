@@ -17,18 +17,18 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-      child: Container(
-        margin: EdgeInsets.all(5),
-        child: ListTile(
-          leading: Text(order.status),
-          title: InkWell(
-            onTap: () {
-              //OrderAlert().editOrderDialog(order);
-              Get.to(OrderDetail(orderId: order.orderId));
-            },
-            child: Row(
+    return InkWell(
+      onTap: () {
+        Get.to(OrderDetail(order: order));
+      },
+      child: Card(
+        color: Colors.green,
+        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+        child: Container(
+          margin: EdgeInsets.all(5),
+          child: ListTile(
+            leading: Text(order.status),
+            title: Row(
               children: [
                 Text(
                   order.orderNumber,

@@ -1,7 +1,9 @@
 import 'package:firetodowithauth/controllers/authController.dart';
 import 'package:firetodowithauth/controllers/userController.dart';
+import 'package:firetodowithauth/layout/mainLayout.dart';
 import 'package:firetodowithauth/screens/appByUser/home.dart';
 import 'package:firetodowithauth/screens/auth/login.dart';
+import 'package:firetodowithauth/testing/mainTest.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +19,9 @@ class Root extends GetWidget<AuthController> {
       builder: (_) {
         if (Get.find<AuthController>().user != null) {
           //Need to Find Controller for user instance
-          return Home();
+          //  Home() for userApp
+          // return Home();
+          return MainLayout();
         } else {
           return Login();
         }

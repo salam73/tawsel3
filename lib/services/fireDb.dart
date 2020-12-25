@@ -109,6 +109,17 @@ class FireDb {
     }
   }
 
+  Stream<QuerySnapshot> getUserList() {
+    try {
+      return FirebaseFirestore.instance
+          .collection('users')
+          //  .where('type', isEqualTo: 'shop')
+          .snapshots();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Stream<List<OrderModel>> orderStream(String uid) {
     return _firestore
         // .collection("users")
